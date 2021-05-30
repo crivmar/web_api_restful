@@ -19,7 +19,14 @@ def populares():
     r=requests.get(url_base+"movie/popular",params=parametros)
     if r.status_code==200:
         documento=r.json()
-    return render_template("pelispopulares.html",)
+        for i in documento.get("results"):
+            if i.get("title"):
+                nombre=i.get("title")
+            else
+                nombre=i.get("original_title")
+            resumen=i.get("overview")
+        total=documento.get("total_pages")
+    return render_template("pelispopulares.html", nombre=nombe,resumen=resumen,total=total)
 
 key=os.environ["KEY"]
 port= os.environ["PORT"]
