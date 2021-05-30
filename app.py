@@ -21,14 +21,16 @@ def populares():
     if r.status_code==200:
         documento=r.json()
         for i in documento.get("results"):
+            diccionario={}
             if i.get("title"):
-                nombre=i.get("title")
+                diccionario["nombre"]=i.get("title")
             else:
-                nombre=i.get("original_title")
-            resumen=i.get("overview")
+                diccionario["nombre"]=i.get("original_title")
+            diccionario["resumen"]=i.get("overview")
+            listado.append(diccionario)
         pagina=documento.get("page")
         total=documento.get("total_pages")
-    return render_template("pelispopulares.html", nombre=nombre,resumen=resumen,pagina=pagina,total=total)
+    return render_template("pelispopulares.html",listado,pagina=pagina,total=total)
 
 key=os.environ["KEY"]
 port= os.environ["PORT"]
