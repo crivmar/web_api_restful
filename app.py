@@ -25,8 +25,9 @@ def populares():
             else
                 nombre=i.get("original_title")
             resumen=i.get("overview")
+            pagina=documento.get("page")
         total=documento.get("total_pages")
-    return render_template("pelispopulares.html", nombre=nombe,resumen=resumen,total=total)
+    return render_template("pelispopulares.html", nombre=nombe,resumen=resumen,pagina=pagina,total=total)
 
 key=os.environ["KEY"]
 port= os.environ["PORT"]
