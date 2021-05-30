@@ -21,6 +21,6 @@ def populares():
         documento=r.json()
     return render_template("pelispopulares.html",)
 
-key=os.environ["key"]
+key=os.environ["KEY"]
 port= os.environ["PORT"]
 app.run('0.0.0.0',int(port),debug=False)
