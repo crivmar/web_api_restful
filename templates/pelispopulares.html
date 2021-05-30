@@ -7,13 +7,25 @@
     <h2>La elección de los espectadores</h2>
     <p>
         <table>
-            <tr>
-                <th></th>
-            </tr>
-            <tr>
-                <td></td>
-            </tr>
-        </table> 
+            <thead>
+                <tr>
+                    <th>Nombre</th>
+                    <th>Resumen</th>
+                    <th>Detalle</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>{{nombre}}</td>
+                    <td>{{resumen}}</td>
+                    <td>{{}}</td>
+                </tr>
+            </tbody>
+        </table>
+        total={{total}}
+        pagina={{pagina}}
+        
+        
     </p>
 
 {% endblock %}
