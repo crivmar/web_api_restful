@@ -1,7 +1,7 @@
 ## IMPORTAR PAQUETES ##
 
-from flask import Flask, render_template, abort, requests
-import os, json
+from flask import Flask, render_template, abort, request
+import os, json, requests
 
 app= Flask (__name__)
 
