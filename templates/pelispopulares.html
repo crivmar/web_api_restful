@@ -15,13 +15,16 @@
                 </tr>
             </thead>
             <tbody>
-                <p>
-                    <tr>
-                        <td>{{nombre}}</td>
-                        <td>{{resumen}}</td>
-                    </tr>
-                </p>
+                {% for i in listado -%}
+                    <p>
+                        <tr>
+                            <td>{{i.nombre}}</td>
+                            <td>{{i.resumen}}</td>
+                        </tr>
+                    </p>
+                {% endfor -%}
             </tbody>
+
         </table>
     </p>
     <section>
