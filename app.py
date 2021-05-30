@@ -17,17 +17,18 @@ def inicio():
 def populares():
     parametros={"api_key":key,"language":'es-ES',"page":1}
     r=requests.get(url_base+"movie/popular",params=parametros)
+    listado=[]
     if r.status_code==200:
         documento=r.json()
         for i in documento.get("results"):
             if i.get("title"):
                 nombre=i.get("title")
-            else
+            else:
                 nombre=i.get("original_title")
             resumen=i.get("overview")
-            pagina=documento.get("page")
+        pagina=documento.get("page")
         total=documento.get("total_pages")
-    return render_template("pelispopulares.html", nombre=nombe,resumen=resumen,pagina=pagina,total=total)
+    return render_template("pelispopulares.html", nombre=nombre,resumen=resumen,pagina=pagina,total=total)
 
 key=os.environ["KEY"]
 port= os.environ["PORT"]
