@@ -30,7 +30,7 @@ def populares():
             listado.append(diccionario)
         pagina=documento.get("page")
         total=documento.get("total_pages")
-    return render_template("pelispopulares.html",listado,pagina=pagina,total=total)
+    return render_template("pelispopulares.html",listado=listado,pagina=pagina,total=total)
 
 key=os.environ["KEY"]
 port= os.environ["PORT"]
