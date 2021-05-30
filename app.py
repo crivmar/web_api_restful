@@ -3,9 +3,14 @@
 from flask import Flask, render_template, abort, requests
 import os, json
 
+app= Flask (__name__)
 
 
+## PROGRAMA ##
 
+@app.route('/', methods=["GET"])
+def inicio():
+    return render_template("index.html")
 
 
 
