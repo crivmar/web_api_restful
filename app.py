@@ -26,7 +26,7 @@ def populares():
                 diccionario["nombre"]=i.get("title")
             else:
                 diccionario["nombre"]=i.get("original_title")
-            diccionario["resumen"]=i.get("overview")
+            diccionario["id"]=i.get("id")
             listado.append(diccionario)
         pagina=documento.get("page")
         total=documento.get("total_pages")
