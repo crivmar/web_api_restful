@@ -10,24 +10,16 @@
             <thead>
                 <tr>
                     <th>Nombre</th>
-                    <th>ID</th>
                     <th>Detalle</th>
                 </tr>
             </thead>
             <tbody>
                 {% for i in listado -%}
-                    <p>
                         <tr>
                             <td>{{i.nombre}}</td>
-                            <td>{{i.id}}</td>
                         </tr>
-                    </p>
                 {% endfor -%}
             </tbody>
         </table>
     </p>
-    <section>
-        total={{total}}
-        pagina={{pagina}}
-    </section>
 {% endblock %}
