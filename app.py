@@ -31,7 +31,7 @@ def populares():
             listado.append(diccionario)
         page=documento.get("page")+1
         total=documento.get("total_pages")
-    return render_template("pelispopulares.html",listado=listado,page=page,total=total)
+    return render_template("pelispopulares.html",listado=listado,page=page)
 
 @app.route('/peliculaspopulares/<int:page>', methods=["GET"])
 def siguiente(page):
@@ -49,9 +49,10 @@ def siguiente(page):
                 diccionario["nombre"]=i.get("original_title")
             diccionario["id"]=i.get("id")
             listado.append(diccionario)
-        pagina=documento.get("page")
         total=documento.get("total_pages")
-    return render_template("pelispopulares.html",listado=listado,pagina=pagina,total=total)
+        if page < total:
+        page=documento.get("page")+1
+    return render_template("pelispopulares.html",listado=listado,page=page)
 
 
 key=os.environ["KEY"]
