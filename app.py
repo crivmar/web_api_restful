@@ -41,6 +41,10 @@ def populares(page=1):
     else:
         abort(404)
 
+@app.route('/seriespopulares', methods=["GET"])
+@app.route('/seriespopulares/<int:page>', methods=["GET"])
+def populares(page=1):
+
 
 key=os.environ["KEY"]
 port= os.environ["PORT"]
