@@ -30,9 +30,9 @@ def populares(page=1):
                 diccionario["nombre"]=i.get("original_title")
             diccionario["id"]=i.get("id")
             listado.append(diccionario)
-        page=documento.get("page")+1
+        page=documento.get("page")
         total=documento.get("total_pages")
-    #return render_template("pelispopulares.html",listado=listado,page=page)
+        anterior=0
         if page>1:
            anterior=page-1
         if page < total:
