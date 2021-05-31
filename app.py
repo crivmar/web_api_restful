@@ -52,7 +52,8 @@ def siguiente(page):
         total=documento.get("total_pages")
         if page < total:
             page=page+1
-    return render_template("pelispopulares.html",listado=listado,page=page)
+        anterior=page-1
+    return render_template("pelispopulares.html",listado=listado,page=page,anterior=anterior)
 
 
 key=os.environ["KEY"]
