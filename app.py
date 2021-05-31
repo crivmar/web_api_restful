@@ -74,6 +74,23 @@ def popular(page=1):
     else:
         abort(404)
 
+## DETALLES ##
+
+@app.route('/peliculas/<int:id>', methods=["GET"])
+def detalle():
+    parametros={"api_key":key,"language":language, id:movie_id}
+    r=requests.get(url_base+"movie/%s"%movie_id,params=parametros)
+    if r.status_code==200:
+        documento=r.json()
+        titulo=documento.get("title")
+        imagen=documento.get("poster_path")
+        resumen=documento.get("overview")
+        popularidad=documento.get("popularity")
+        fecha=documento.get("release_date")
+        return render_template("detallep.html",titulo=titulo,imagen=imagen,resumen=resumen,popularidad=popularidad,fecha=fecha)
+    else
+        
+        
 key=os.environ["KEY"]
 port= os.environ["PORT"]
 app.run('0.0.0.0',int(port),debug=False)
