@@ -50,9 +50,9 @@ def siguiente(page):
             diccionario["id"]=i.get("id")
             listado.append(diccionario)
         total=documento.get("total_pages")
+        anterior=page-1
         if page < total:
             page=page+1
-        anterior=page-1
     return render_template("pelispopulares.html",listado=listado,page=page,anterior=anterior)
 
 
