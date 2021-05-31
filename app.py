@@ -3,6 +3,7 @@
 from flask import Flask, render_template, abort, request
 import os, json, requests
 
+
 app= Flask (__name__)
 url_base="https://api.themoviedb.org/3/"
 
@@ -86,9 +87,9 @@ def detalle(id):
         imagen=documento.get("poster_path")
         resumen=documento.get("overview")
         popularidad=documento.get("popularity")
-        fecha=documento.get("release_date")
-        fecha=fecha[::-1]
-        return render_template("detallep.html",titulo=titulo,imagen=imagen,resumen=resumen,popularidad=popularidad,fecha=fecha)
+        fecha=str(documento.get("release_date"))
+        f=fecha[8:9]+"-"+fecha[5:6]+"-"+fecha[0:3]
+        return render_template("detallep.html",titulo=titulo,imagen=imagen,resumen=resumen,popularidad=popularidad,f=f)
     else:
         abort(404)
         
