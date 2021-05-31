@@ -14,8 +14,9 @@ def inicio():
     return render_template("index.html")
 
 @app.route('/peliculaspopulares', methods=["GET"])
-def populares():
-    page=1
+@app.route('/peliculaspopulares/<int:page>', methods=["GET"])
+def populares(page=1):
+  
     parametros={"api_key":key,"language":'es-ES',"page":page}
     r=requests.get(url_base+"movie/popular",params=parametros)
     listado=[]
@@ -31,29 +32,14 @@ def populares():
             listado.append(diccionario)
         page=documento.get("page")+1
         total=documento.get("total_pages")
-    return render_template("pelispopulares.html",listado=listado,page=page)
-
-@app.route('/peliculaspopulares/<int:page>', methods=["GET"])
-def siguiente(page):
-    page=page
-    parametros={"api_key":key,"language":'es-ES',"page":page}
-    r=requests.get(url_base+"movie/popular",params=parametros)
-    listado=[]
-    if r.status_code==200:
-        documento=r.json()
-        for i in documento.get("results"):
-            diccionario={}
-            if i.get("title"):
-                diccionario["nombre"]=i.get("title")
-            else:
-                diccionario["nombre"]=i.get("original_title")
-            diccionario["id"]=i.get("id")
-            listado.append(diccionario)
-        total=documento.get("total_pages")
-        anterior=page-1
+    #return render_template("pelispopulares.html",listado=listado,page=page)
+        if page>1:
+           anterior=page-1
         if page < total:
             page=page+1
-    return render_template("pelispopulares.html",listado=listado,page=page,anterior=anterior)
+        return render_template("pelispopulares.html",listado=listado,page=page,anterior=anterior)
+    else:
+        abort(404)
 
 
 key=os.environ["KEY"]
