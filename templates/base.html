@@ -26,13 +26,8 @@
 			{% block content %}
             {% endblock %}
 
-		<!-- Footer -->
-			<footer id="footer">
-				<ul class="copyright">
-					<li>&copy; Los derechos pertenecen a sus respectivos autores.</li><li>Credits: <a href="http://html5up.net">HTML5 UP</a></li>
-				</ul>
-			</footer>
-
+			{% block footer %}
+			{% endblock %}	
 		<!-- Scripts -->
 			<script src="{{url_for('static', filename='assets/js/main.js')}}"></script>
 
