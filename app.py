@@ -37,7 +37,7 @@ def populares(page=1):
            anterior=page-1
         if page < total:
             page=page+1
-        return render_template("pelispopulares.html",listado=listado,page=page,anterior=anterior)
+        return render_template("pelispopulares.html",listado=listado,page=page,anterior=anterior,total=total)
     else:
         abort(404)
 
