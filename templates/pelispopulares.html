@@ -22,12 +22,10 @@
             </tbody>
         </table>
     </p>
-    <section>
-        {% if anterior %}
-            <a href="/peliculaspopulares/{{anterior}}"><button>Anterior</button></a>
-        {% endif %}   
-        <a href="/peliculaspopulares/{{page}}"><button>Siguiente</button></a>
-    </section>
+    {% if anterior %}
+        <a href="/peliculaspopulares/{{anterior}}"><button>Anterior</button></a>
+    {% endif %}   
+    <a href="/peliculaspopulares/{{page}}"><button>Siguiente</button></a>
     <section>
         <a href="/"><button>Página principal</button></a>
     </section>
