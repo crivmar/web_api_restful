@@ -89,7 +89,7 @@ def detalle():
         fecha=documento.get("release_date")
         return render_template("detallep.html",titulo=titulo,imagen=imagen,resumen=resumen,popularidad=popularidad,fecha=fecha)
     else
-        
+        abort(404)
         
 key=os.environ["KEY"]
 port= os.environ["PORT"]
