@@ -87,8 +87,8 @@ def detalle(id):
         imagen=documento.get("poster_path")
         resumen=documento.get("overview")
         popularidad=documento.get("popularity")
-        fecha=str(documento.get("release_date"))
-        f=fecha[8:9]+"-"+fecha[5:6]+"-"+fecha[0:3]
+        fecha=documento.get("release_date")
+        f=fecha[8:10]+"-"+fecha[5:7]+"-"+fecha[0:4]
         return render_template("detallep.html",titulo=titulo,imagen=imagen,resumen=resumen,popularidad=popularidad,f=f)
     else:
         abort(404)
