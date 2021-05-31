@@ -78,8 +78,8 @@ def popular(page=1):
 
 @app.route('/peliculas/<id>', methods=["GET"])
 def detalle(id):
-    parametros={"api_key":key,"language":'es-ES', id:movie_id}
-    r=requests.get(url_base+"movie/%s"%movie_id,params=parametros)
+    parametros={"api_key":key,"language":'es-ES', "id":id}
+    r=requests.get(url_base+"movie/%s"%id,params=parametros)
     if r.status_code==200:
         documento=r.json()
         titulo=documento.get("title")

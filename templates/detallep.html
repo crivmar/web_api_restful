@@ -1,14 +1,14 @@
 {% extends "base.html" %}
-{% block header %}<h1>Lista de películas más populares</h1>
+{% block header %}<h1>{{titulo}}</h1>
 {% endblock %}
 
 {% block content %}
 
-    Título:{{titulo}}
-    Resumen:{{resumen}}
-    Fecha de estreno: {{fecha}}
-    Popularidad:{{popularidad}}
     
+    <p>Resumen:{{resumen}}</p>
+    <p>Fecha de estreno: {{fecha}}</p>
+    <p>Popularidad:{{popularidad}}</p>
+
     <section>
         <a href="/"><button>Página principal</button></a>
     </section>
