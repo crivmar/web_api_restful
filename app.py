@@ -35,7 +35,7 @@ def populares():
     return render_template("pelispopulares.html",listado=listado,pagina=pagina,total=total)
 
 @app.route('/peliculaspopulares/<int:page>', methods=["GET"])
-def populares(page):
+def siguiente(page):
     page=page
     parametros={"api_key":key,"language":'es-ES',"page":page}
     r=requests.get(url_base+"movie/popular",params=parametros)
