@@ -9,9 +9,13 @@ url_base="https://api.themoviedb.org/3/"
 
 ## PROGRAMA ##
 
+## INDEX ##
+
 @app.route('/', methods=["GET"])
 def inicio():
     return render_template("index.html")
+
+## CINE POPULAR ##
 
 @app.route('/peliculaspopulares', methods=["GET"])
 @app.route('/peliculaspopulares/<int:page>', methods=["GET"])
@@ -41,10 +45,34 @@ def populares(page=1):
     else:
         abort(404)
 
+## SERIES POPULARES ##
+
 @app.route('/seriespopulares', methods=["GET"])
 @app.route('/seriespopulares/<int:page>', methods=["GET"])
-def populares(page=1):
-
+def popular(page=1):
+    parametros={"api_key":key,"language":'es-ES',"page":page}
+    r=requests.get(url_base+"tv/popular",params=parametros)
+    listado=[]
+    if r.status_code==200:
+        documento=r.json()
+        for i in documento.get("results"):
+            diccionario={}
+            if i.get("name"):
+                diccionario["nombre"]=i.get("name")
+            else:
+                diccionario["nombre"]=i.get("original_name")
+            diccionario["id"]=i.get("id")
+            listado.append(diccionario)
+        page=documento.get("page")
+        total=documento.get("total_pages")
+        anterior=0
+        if page>1:
+           anterior=page-1
+        if page < total:
+            page=page+1
+        return render_template("seriespopulares.html",listado=listado,page=page,anterior=anterior,total=total)
+    else:
+        abort(404)
 
 key=os.environ["KEY"]
 port= os.environ["PORT"]
