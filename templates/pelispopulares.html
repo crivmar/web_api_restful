@@ -24,6 +24,9 @@
     </p>    
     <section>
         <a href="/peliculaspopulares/{{page}}">Siguiente</a>
+        {% if anterior %}
+            <a href="/peliculaspopulares/{{anterior}}">Anterior</a>
+        {% endif %}
     </section>
     <section>
         <a href="/">Volver</a>

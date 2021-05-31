@@ -51,7 +51,7 @@ def siguiente(page):
             listado.append(diccionario)
         total=documento.get("total_pages")
         if page < total:
-        page=documento.get("page")+1
+            page=page+1
     return render_template("pelispopulares.html",listado=listado,page=page)
 
 
