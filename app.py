@@ -92,7 +92,34 @@ def detalle(id):
         return render_template("detallep.html",titulo=titulo,imagen=imagen,resumen=resumen,popularidad=popularidad,f=f)
     else:
         abort(404)
-        
+
+## BUSCADOR ##
+
+@app.route('/lista', methods=["GET","POST"])
+def lista(page=1):
+    cadena= request.form.get("cadena")
+    tipo=request.form.get("tipo")
+    parametros={"api_key":key,"language":'es-ES',"query":cadena,"page":page}
+    r=requests.get(url_base+"search/movie",params=parametros)
+    listado=[]
+    if r.status_code==200 and tipo=="Película":
+        documento=r.json()
+        for i in documento.get("results"):
+            diccionario={}
+            if i.get("name"):
+                diccionario["nombre"]=i.get("name")
+            else:
+                diccionario["nombre"]=i.get("original_name")
+            diccionario["id"]=i.get("id")
+            listado.append(diccionario)
+        page=documento.get("page")
+        total=documento.get("total_pages")
+        anterior=0
+        if page>1:
+           anterior=page-1
+        if page < total:
+            page=page+1
+        return render_template("lista.html", listado=listado,page=page,anterior=anterior,total=total )
 key=os.environ["KEY"]
 port= os.environ["PORT"]
 app.run('0.0.0.0',int(port),debug=False)

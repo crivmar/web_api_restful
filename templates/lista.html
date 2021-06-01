@@ -1,0 +1,22 @@
+{% block content %}
+    <h2>Resultado de la búsqueda por {{cadena}}</h2>
+    <p>
+        <table>
+            <thead>
+                <tr>
+                    <th>Nombre</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for i in listado -%}
+                        <tr>
+                            <td><a href="peliculas/{{i.id}}">{{i.nombre}}</a></td>
+                        </tr>
+                {% endfor -%}
+            </tbody>
+        </table>
+    </p>
+    <section>
+        <a href="/"><button>Página principal</button></a>
+    </section>
+{% endblock %}
