@@ -9,8 +9,18 @@
         <tbody>
             <tr><a href="/peliculaspopulares"><button>Películas populares</button></a></tr>
             <tr><a href="/seriespopulares"><button>Series populares</button></a></tr>
-        </tbody>    
-    </ul></p>
+        </tbody>
+        <form action="/lista" method="POST">
+            <label for="message">Búsqueda</label>
+            <input type="text" name="cadena" value="{{cadena}}"/>
+            
+            <select name="tipo">
+                <option>Películas</option>
+                <option>Series</option>
+            </select>
+            <input type="submit" value="Buscar"/>
+        </form>    
+    </p>
 
 {% endblock %}
 {% block footer %}
