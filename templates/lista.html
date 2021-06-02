@@ -17,6 +17,14 @@
             </tbody>
         </table>
     </p>
+    <div class="col-md-3 col-md-offset-9 text-right">
+        {% if anterior %}
+            <a href="/lista"><button>Primera</button></a>
+            <a href="/lista/{{anterior}}"><button>Anterior</button></a>
+        {% endif %}   
+        <a href="/lista/{{page}}"><button>Siguiente</button></a>
+        <a href="/lista/{{total}}"><button>Última</button></a>
+    </div>
     <section>
         <a href="/"><button>Página principal</button></a>
     </section>

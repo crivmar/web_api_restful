@@ -51,6 +51,7 @@ def populares(page=1):
 @app.route('/seriespopulares', methods=["GET"])
 @app.route('/seriespopulares/<int:page>', methods=["GET"])
 def popular(page=1):
+
     parametros={"api_key":key,"language":'es-ES',"page":page}
     r=requests.get(url_base+"tv/popular",params=parametros)
     listado=[]
@@ -96,33 +97,36 @@ def detalle(id):
 ## BUSCADOR ##
 
 @app.route('/lista', methods=["POST"])
+@app.route('/lista/<int:page>', methods=["GET"])
 def lista(page=1):
+    
     cadena= request.form.get("cadena")
     tipo=request.form.get("tipo")
-    parametros={"api_key":key,"language":'es-ES',"query":cadena,"page":page}
-    r=requests.get(url_base+"search/movie",params=parametros)
     listado=[]
-    if r.status_code==200 and tipo=="Películas":
-        documento=r.json()
-        for i in documento.get("results"):
-            diccionario={}
-            if i.get("title"):
-                diccionario["nombre"]=i.get("title")
-            else:
-                diccionario["nombre"]=i.get("original_title")
-            diccionario["id"]=i.get("id")
-            listado.append(diccionario)
-        page=documento.get("page")
-        total=documento.get("total_pages")
-        anterior=0
-        if page>1:
-           anterior=page-1
-        if page < total:
-            page=page+1
-        print(listado)
-        return render_template("lista.html", listado=listado,page=page,anterior=anterior,total=total )
-    else:
-        abort(404)
+    if tipo=="Películas":
+        parametros={"api_key":key,"language":'es-ES',"query":cadena,"page":page}
+        r=requests.get(url_base+"search/movie",params=parametros)
+        if r.status_code==200:
+            documento=r.json()
+            for i in documento.get("results"):
+                diccionario={}
+                if i.get("title"):
+                    diccionario["nombre"]=i.get("title")
+                else:
+                    diccionario["nombre"]=i.get("original_title")
+                diccionario["id"]=i.get("id")
+                listado.append(diccionario)
+                page=documento.get("page")
+                total=documento.get("total_pages")
+            anterior=0
+            if page>1:
+                anterior=page-1
+            if page < total:
+                page=page+1
+            print(listado)
+            return render_template("lista.html", listado=listado,page=page,anterior=anterior,total=total )
+        else:
+            abort(404)
 key=os.environ["KEY"]
 port= os.environ["PORT"]
 app.run('0.0.0.0',int(port),debug=False)
