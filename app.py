@@ -95,21 +95,21 @@ def detalle(id):
 
 ## BUSCADOR ##
 
-@app.route('/lista', methods=["GET","POST"])
+@app.route('/lista', methods=["POST"])
 def lista(page=1):
     cadena= request.form.get("cadena")
     tipo=request.form.get("tipo")
     parametros={"api_key":key,"language":'es-ES',"query":cadena,"page":page}
     r=requests.get(url_base+"search/movie",params=parametros)
     listado=[]
-    if r.status_code==200 and tipo=="Película":
+    if r.status_code==200 and tipo=="Películas":
         documento=r.json()
         for i in documento.get("results"):
             diccionario={}
-            if i.get("name"):
-                diccionario["nombre"]=i.get("name")
+            if i.get("title"):
+                diccionario["nombre"]=i.get("title")
             else:
-                diccionario["nombre"]=i.get("original_name")
+                diccionario["nombre"]=i.get("original_title")
             diccionario["id"]=i.get("id")
             listado.append(diccionario)
         page=documento.get("page")
@@ -119,7 +119,10 @@ def lista(page=1):
            anterior=page-1
         if page < total:
             page=page+1
+        print(listado)
         return render_template("lista.html", listado=listado,page=page,anterior=anterior,total=total )
+    else:
+        abort(404)
 key=os.environ["KEY"]
 port= os.environ["PORT"]
 app.run('0.0.0.0',int(port),debug=False)
