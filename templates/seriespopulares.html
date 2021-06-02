@@ -13,7 +13,7 @@
             <tbody>
                 {% for i in listado -%}
                         <tr>
-                            <td>{{i.nombre}}</td>
+                            <td><a href="/series/{{i.id}}">{{i.nombre}}</a></td>
                         </tr>
                 {% endfor -%}
             </tbody>

@@ -94,6 +94,26 @@ def detalle(id):
     else:
         abort(404)
 
+@app.route('/series/<id>', methods=["GET"])
+def detallese(id):
+    parametros={"api_key":key,"language":'es-ES', "id":id}
+    r=requests.get(url_base+"movie/%s"%id,params=parametros)
+    if r.status_code==200:
+        documento=r.json()
+        for i in documento.get("created_by"):
+            creador=i.get("name")
+        for i in documento.get("last_episode_to_air"):
+            titulo=i.get("name")
+        imagen=documento.get("poster_path")
+        resumen=documento.get("overview")
+        popularidad=documento.get("popularity")
+        for i in documento.get("seasons"):
+            fecha=documento.get("air_date")
+        f=fecha[8:10]+"-"+fecha[5:7]+"-"+fecha[0:4]
+        return render_template("detallep.html",titulo=titulo,imagen=imagen,resumen=resumen,popularidad=popularidad,f=f)
+    else:
+        abort(404)
+
 ## BUSCADOR ##
 
 @app.route('/lista', methods=["POST"])
