@@ -2,20 +2,37 @@
 {% block content %}
     <h2>Resultado de la búsqueda por {{cadena}}</h2>
     <p>
-        <table>
-            <thead>
-                <tr>
-                    <th>Nombre</th>
-                </tr>
-            </thead>
-            <tbody>
-                {% for i in listado -%}
+        {% if s %}
+            <table>
+                <thead>
+                    <tr>
+                        <th>Nombre</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for i in listado -%}
+                        <tr>
+                            <td><a href="series/{{i.id}}">{{i.nombre}}</a></td>
+                        </tr>
+                    {% endfor -%}
+                </tbody>
+            </table>
+        {% else %}
+            <table>
+                <thead>
+                    <tr>
+                        <th>Nombre</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for i in listado -%}
                         <tr>
                             <td><a href="peliculas/{{i.id}}">{{i.nombre}}</a></td>
                         </tr>
-                {% endfor -%}
-            </tbody>
-        </table>
+                    {% endfor -%}
+                </tbody>
+            </table>
+        {% endif %}
     </p>
     <div class="col-md-3 col-md-offset-9 text-right">
         {% if anterior %}
