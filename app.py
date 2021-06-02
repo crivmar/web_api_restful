@@ -97,7 +97,7 @@ def detalle(id):
 ## BUSCADOR ##
 
 @app.route('/lista', methods=["POST"])
-@app.route('/lista/<int:page>', methods=["GET"])
+@app.route('/lista/<tipo>/<int:page>', methods=["GET"])
 def lista(page=1):
     
     cadena= request.form.get("cadena")
@@ -123,8 +123,8 @@ def lista(page=1):
                 anterior=page-1
             if page < total:
                 page=page+1
-            print(listado)
-            return render_template("lista.html", listado=listado,page=page,anterior=anterior,total=total )
+            tipo="Películas"
+            return render_template("lista.html", listado=listado,page=page,anterior=anterior,total=total,tipo=tipo)
         else:
             abort(404)
 key=os.environ["KEY"]
