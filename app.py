@@ -127,6 +127,32 @@ def lista(page=1):
             return render_template("lista.html", listado=listado,page=page,anterior=anterior,total=total,tipo=tipo)
         else:
             abort(404)
+    else:
+        parametros={"api_key":key,"language":'es-ES',"query":cadena,"page":page}
+        r=requests.get(url_base+"search/tv",params=parametros)
+        if r.status_code==200:
+            documento=r.json()
+            for i in documento.get("results"):
+                diccionario={}
+                if i.get("name"):
+                    diccionario["nombre"]=i.get("name")
+                else:
+                    diccionario["nombre"]=i.get("original_name")
+                diccionario["id"]=i.get("id")
+                listado.append(diccionario)
+                page=documento.get("page")
+                total=documento.get("total_pages")
+            anterior=0
+            s= True
+            if page>1:
+                anterior=page-1
+            if page < total:
+                page=page+1
+            tipo="Películas"
+            return render_template("lista.html", listado=listado,page=page,anterior=anterior,total=total,tipo=tipo,s=s,cadena=cadena)
+        else:
+            abort(404)
+
 key=os.environ["KEY"]
 port= os.environ["PORT"]
 app.run('0.0.0.0',int(port),debug=False)
