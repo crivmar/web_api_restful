@@ -104,9 +104,9 @@ def detallese(id):
             creador=i.get("name")
         for i in documento.get("last_episode_to_air"):
             titulo=i.get("name")
-        imagen=documento.get("poster_path")
-        resumen=documento.get("overview")
-        popularidad=documento.get("popularity")
+            imagen=documento.get("poster_path")
+            resumen=documento.get("overview")
+            popularidad=documento.get("popularity")
         for i in documento.get("seasons"):
             fecha=documento.get("air_date")
         f=fecha[8:10]+"-"+fecha[5:7]+"-"+fecha[0:4]
