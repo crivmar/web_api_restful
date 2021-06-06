@@ -109,7 +109,9 @@ def detallese(id):
         temporadas=documento.get('number_of_seasons')
         episodios=documento.get('number_of_episodes')
         compse=1
-        return render_template("detallep.html",titulo=titulo,imagen=imagen,resumen=resumen,popularidad=popularidad,f=f,temporadas=temporadas,episodios=episodios,compse=compse)
+        if documento.get('in_production')== True:
+            pro=True
+        return render_template("detallep.html",titulo=titulo,imagen=imagen,resumen=resumen,popularidad=popularidad,f=f,temporadas=temporadas,episodios=episodios,compse=compse,pro=pro)
     else:
         abort(404)
 
