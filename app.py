@@ -116,6 +116,35 @@ def detallese(id):
     else:
         abort(404)
 
+## PRÓXIMOS ESTRENOS ##
+
+@app.route('/proxcine', methods=["GET"])
+@app.route('/proxcine/', methods=["GET"])
+def prox(page=1):
+    parametros={"api_key":key,"language":'es-ES',"page":page}
+    r=requests.get(url_base+"movie/upcoming",params=parametros)
+    listado=[]
+    if r.status_code==200:
+        documento=r.json()
+        for i in documento.get("results"):
+            diccionario={}
+            if i.get("title"):
+                diccionario["nombre"]=i.get("title")
+            else:
+                diccionario["nombre"]=i.get("original_title")
+            diccionario["id"]=i.get("id")
+            listado.append(diccionario)
+        page=documento.get("page")
+        total=documento.get("total_pages")
+        anterior=0
+        if page>1:
+           anterior=page-1
+        if page < total:
+            page=page+1
+        return render_template("proximamente.html",listado=listado,page=page,anterior=anterior,total=total)
+    else:
+        abort(404)
+
 ## BUSCADOR ##
 
 @app.route('/lista', methods=["POST"])
