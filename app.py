@@ -1,7 +1,7 @@
 ## IMPORTAR PAQUETES ##
 
 from flask import Flask, render_template, abort, request
-import os, json, requests
+import os, json, requests, datetime
 
 
 app= Flask (__name__)
@@ -124,24 +124,27 @@ def prox(page=1):
     parametros={"api_key":key,"language":'es-ES',"page":page}
     r=requests.get(url_base+"movie/upcoming",params=parametros)
     listado=[]
+    tiempo=str(datetime.datetime.now())
     if r.status_code==200:
         documento=r.json()
         for i in documento.get("results"):
-            diccionario={}
-            if i.get("title"):
-                diccionario["nombre"]=i.get("title")
-            else:
-                diccionario["nombre"]=i.get("original_title")
-            diccionario["id"]=i.get("id")
-            listado.append(diccionario)
-        page=documento.get("page")
-        total=documento.get("total_pages")
-        anterior=0
-        if page>1:
-           anterior=page-1
-        if page < total:
-            page=page+1
-        return render_template("proximamente.html",listado=listado,page=page,anterior=anterior,total=total)
+            fecha=i.get('release_date')
+            if tiempo < fecha:
+                diccionario={}
+                if i.get("title"):
+                    diccionario["nombre"]=i.get("title")
+                else:
+                    diccionario["nombre"]=i.get("original_title")
+                diccionario["id"]=i.get("id")
+                listado.append(diccionario)
+                page=documento.get("page")
+                total=documento.get("total_pages")
+                anterior=0
+                if page>1:
+                    anterior=page-1
+                if page < total:
+                    page=page+1
+                return render_template("proximamente.html",listado=listado,page=page,anterior=anterior,total=total)
     else:
         abort(404)
 
