@@ -136,6 +136,9 @@ def prox(page=1):
             else:
                 diccionario["nombre"]=i.get("original_title")
             diccionario["id"]=i.get("id")
+            fecha=i.get('release_date')
+            f=fecha[8:10]+"-"+fecha[5:7]+"-"+fecha[0:4]
+            diccionario["fecha"]=f
             listado.append(diccionario)
         page=documento.get("page")
         total=documento.get("total_pages")
