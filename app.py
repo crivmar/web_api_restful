@@ -124,9 +124,11 @@ def prox(page=1):
     parametros={"api_key":key,"language":'es-ES',"page":page,"region":'ES'}
     r=requests.get(url_base+"movie/upcoming",params=parametros)
     listado=[]
+    prox1=False
     if r.status_code==200:
         documento=r.json()
         tot=False
+        prox1=True
         for i in documento.get("results"):
             diccionario={}
             if i.get("title"):
@@ -144,7 +146,7 @@ def prox(page=1):
                 anterior=page-1
             if page < total:
                 page=page+1
-        return render_template("proximamente.html",listado=listado,page=page,anterior=anterior,total=total,tot=tot)
+        return render_template("proximamente.html",listado=listado,page=page,anterior=anterior,total=total,tot=tot,prox1=prox1)
     else:
         abort(404)
 
