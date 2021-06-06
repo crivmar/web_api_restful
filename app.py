@@ -100,6 +100,7 @@ def detallese(id):
     r=requests.get(url_base+"tv/%s"%id,params=parametros)
     if r.status_code==200:
         documento=r.json()
+        pro=False
         titulo=documento.get('name')
         imagen=documento.get("poster_path")
         resumen=documento.get("overview")
