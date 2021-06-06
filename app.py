@@ -121,7 +121,7 @@ def detallese(id):
 @app.route('/proxcine', methods=["GET"])
 @app.route('/proxcine/', methods=["GET"])
 def prox(page=1):
-    parametros={"api_key":key,"language":'es-ES',"page":page}
+    parametros={"api_key":key,"language":'es-ES',"page":page,"region":'ES'}
     r=requests.get(url_base+"movie/upcoming",params=parametros)
     listado=[]
     tiempo=str(datetime.datetime.now())
