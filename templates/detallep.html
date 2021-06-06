@@ -4,9 +4,13 @@
 
 {% block content %}
     {% if compse %}
-        <div style="text-align: center"><img src="https://image.tmdb.org/t/p/w300/{{imagen}}"></div>
+        <div style="text-align: center"><img src="https://image.tmdb.org/t/p/w200/{{imagen}}"></div>
         <p>{{resumen}}</p>
         <p>Fecha de primera emisión: {{f}}</p>
+        {%if pro%}
+            <p>Estado="En emisión"</p>
+        {% else %}
+            Estado="Terminada"
         <p>Temporadas: {{temporadas}}</p>
         <p>Episodios: {{episodios}}</p>
         <p>Popularidad: {{popularidad}}</p>
