@@ -3,13 +3,25 @@
 {% endblock %}
 
 {% block content %}
-
-    <div style="text-align: center"><img src="https://image.tmdb.org/t/p/w300/{{imagen}}"></div>
-    <p>{{resumen}}</p>
-    <p>Fecha de estreno: {{f}}</p>
-    <p>Popularidad: {{popularidad}}</p>
-    <section>
-        <a href="/peliculaspopulares"><button>Volver a populares</button></a>
-        <a href="/"><button>Página principal</button></a>
-    </section>
+    {% if compse %}
+        <div style="text-align: center"><img src="https://image.tmdb.org/t/p/w300/{{imagen}}"></div>
+        <p>{{resumen}}</p>
+        <p>Fecha de primera emisión: {{f}}</p>
+        <p>Temporadas: {{temporadas}}</p>
+        <p>Episodios: {{episodios}}</p>
+        <p>Popularidad: {{popularidad}}</p>
+        <section>
+            <a href="/peliculaspopulares"><button>Volver a populares</button></a>
+            <a href="/"><button>Página principal</button></a>
+        </section>
+    {% else %}
+        <div style="text-align: center"><img src="https://image.tmdb.org/t/p/w300/{{imagen}}"></div>
+        <p>{{resumen}}</p>
+        <p>Fecha de estreno: {{f}}</p>
+        <p>Popularidad: {{popularidad}}</p>
+        <section>
+            <a href="/peliculaspopulares"><button>Volver a populares</button></a>
+            <a href="/"><button>Página principal</button></a>
+        </section>
+    {% endif %}
 {% endblock %}
