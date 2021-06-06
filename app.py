@@ -97,8 +97,9 @@ def detalle(id):
 @app.route('/series/<id>', methods=["GET"])
 def detallese(id):
     parametros={"api_key":key,"language":'es-ES', "id":id}
-    r=requests.get(url_base+"movie/%s"%id,params=parametros)
+    r=requests.get(url_base+"tv/%s"%id,params=parametros)
     if r.status_code==200:
+        documento=r.json()
         titulo=documento.get('name')
         imagen=documento.get("poster_path")
         resumen=documento.get("overview")
@@ -106,7 +107,7 @@ def detallese(id):
         fecha=documento.get('first_air_date')
         f=fecha[8:10]+"-"+fecha[5:7]+"-"+fecha[0:4]
         temporadas=documento.get('number_of_seasons')
-        episodios=documeto.get('number_of_episodes')
+        episodios=documento.get('number_of_episodes')
         compse=1
         return render_template("detallep.html",titulo=titulo,imagen=imagen,resumen=resumen,popularidad=popularidad,f=f,temporadas=temporadas,episodios=episodios,compse=compse)
     else:
