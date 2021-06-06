@@ -1,7 +1,7 @@
 {% extends "base.html" %}
 
 {% block content %}
-    <h2>Películas más populares ahora mismo</h2>
+    <h2>Próximamente en cines</h2>
     <p>
         <table>
             <thead>
@@ -19,12 +19,14 @@
         </table>
     </p>
     <div class="col-md-3 col-md-offset-9 text-right">
-        {% if anterior %}
-            <a href="/proxcine"><button>Primera</button></a>
-            <a href="/proxcine/{{anterior}}"><button>Anterior</button></a>
-        {% endif %}   
-        <a href="/proxcine/{{page}}"><button>Siguiente</button></a>
-        <a href="/proxcine/{{total}}"><button>Última</button></a>
+        {% if tot %}
+            {% if anterior %}
+                <a href="/proxcine"><button>Primera</button></a>
+                <a href="/proxcine/{{anterior}}"><button>Anterior</button></a>
+            {% endif %}   
+                <a href="/proxcine/{{page}}"><button>Siguiente</button></a>
+                <a href="/proxcine/{{total}}"><button>Última</button></a>
+        {% endif %}
     </div>
     <section>
         <a href="/"><button>Página principal</button></a>
