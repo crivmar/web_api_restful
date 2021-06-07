@@ -194,7 +194,6 @@ def lista(page=1):
     else:
         parametros={"api_key":key,"language":'es-ES',"query":cadena,"page":page}
         r=requests.get(url_base+"search/tv",params=parametros)
-        session["tipo"]=tipo
         session["cadena"]=cadena
         if r.status_code==200:
             documento=r.json()
@@ -214,7 +213,7 @@ def lista(page=1):
                 anterior=page-1
             if page < total:
                 page=page+1
-            tipo="Películas"
+            tipo="Series"
             return render_template("lista.html", listado=listado,page=page,anterior=anterior,total=total,tipo=tipo,s=s,cadena=cadena)
         else:
             abort(404)
