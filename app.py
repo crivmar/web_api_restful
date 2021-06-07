@@ -188,7 +188,7 @@ def lista(page=1):
             if page < total:
                 page=page+1
             tipo="Películas"
-            return render_template("lista.html", listado=listado,page=page,anterior=anterior,total=total, cadena=cadena)
+            return render_template("lista.html", listado=listado,page=page,anterior=anterior,total=total, cadena=cadena,tipo=tipo)
         else:
             abort(404)
     else:
