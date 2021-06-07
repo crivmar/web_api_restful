@@ -194,6 +194,8 @@ def lista(page=1):
     else:
         parametros={"api_key":key,"language":'es-ES',"query":cadena,"page":page}
         r=requests.get(url_base+"search/tv",params=parametros)
+        session["tipo"]=tipo
+        session["cadena"]=cadena
         if r.status_code==200:
             documento=r.json()
             for i in documento.get("results"):
