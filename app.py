@@ -1,12 +1,12 @@
 ## IMPORTAR PAQUETES ##
 
-from flask import Flask, render_template, abort, request
-import os, json, requests, datetime
+from flask import Flask, render_template, abort, request,session
+import os, json, requests
 
 
 app= Flask (__name__)
 url_base="https://api.themoviedb.org/3/"
-
+app.secret_key = 'esto-es-una-clave-muy-secreta'
 
 ## PROGRAMA ##
 
@@ -156,11 +156,16 @@ def prox(page=1):
 ## BUSCADOR ##
 
 @app.route('/lista', methods=["POST"])
-@app.route('/lista/<tipo>/<int:page>', methods=["GET"])
+@app.route('/lista/<int:page>', methods=["GET"])
 def lista(page=1):
-    
-    cadena= request.form.get("cadena")
-    tipo=request.form.get("tipo")
+    if request.method=="POST":
+        cadena= request.form.get("cadena")
+        tipo=request.form.get("tipo")
+        session["tipo"]=tipo
+        session["cadena"]=cadena
+    else:
+        cadena=session["cadena"]
+        tipo=session["tipo"]
     listado=[]
     if tipo=="Películas":
         parametros={"api_key":key,"language":'es-ES',"query":cadena,"page":page}
@@ -183,7 +188,7 @@ def lista(page=1):
             if page < total:
                 page=page+1
             tipo="Películas"
-            return render_template("lista.html", listado=listado,page=page,anterior=anterior,total=total,tipo=tipo, cadena=cadena)
+            return render_template("lista.html", listado=listado,page=page,anterior=anterior,total=total, cadena=cadena)
         else:
             abort(404)
     else:
